@@ -12,9 +12,9 @@
 트렐로에서 내게 필요한 기능을 추려서 카피하기
 
 # 기반기술(예정)
-java 1.8
-spring 4
-tomcat 7
-mysql
-vue.js
+java 1.8  
+spring 4  
+tomcat 7  
+mysql  
+vue.js  
 
