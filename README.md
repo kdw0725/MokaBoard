@@ -11,10 +11,15 @@
 # 1차목표 
 트렐로에서 내게 필요한 기능을 추려서 카피하기
 
-# 기반기술(예정)
+# 개발환경
+windows 10 pro(64)
 java 1.8  
 spring 4  
 tomcat 7  
-mysql  
+mysql 8.0.11  
 vue.js  
-docker  
+
+# 개발도구
+STS
+docker
+mysql workbench 8.0.11 CE (64bit)
