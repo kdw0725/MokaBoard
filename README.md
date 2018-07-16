@@ -17,7 +17,9 @@ java 1.8
 spring 4  
 tomcat 7  
 mysql 8.0.11  
-vue.js  
+vue.js
+mybatis  
+
 
 # 개발도구
 STS
