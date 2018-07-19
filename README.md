@@ -12,14 +12,16 @@
 트렐로에서 내게 필요한 기능을 추려서 카피하기
 
 # 개발환경
-windows 10 pro(64)
+windows 10 pro(64)  
 java 1.8  
 spring 4  
 tomcat 7  
 mysql 8.0.11  
 vue.js  
+mybatis  
+
 
 # 개발도구
-STS
-docker
-mysql workbench 8.0.11 CE (64bit)
+STS  
+docker  
+mysql workbench 8.0.11 CE (64bit)  
