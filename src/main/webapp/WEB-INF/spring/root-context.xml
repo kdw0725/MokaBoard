@@ -14,7 +14,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/mokaboard_dev?useSSL=false"></property>
 		<property name="username" value="mokaboard"></property>
 		<property name="password" value="password"></property>
@@ -23,6 +23,14 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property> <!-- MyBatis mapper 경로럴 지정한다. -->
 	</bean>
+	
+	<!-- SqlSessionTemplate은 MyBatis의 SqlSession인터페이스를 구현한 클래스로 기본적인 트랜잭션의 관리나 쓰레드 처리의 안정성 등을 보장해주고, 데이터베이스의 연겨로가 종료를 책임진다. -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	<context:component-scan base-package="com.hanumoka.mokaboard" />
 
 </beans>
