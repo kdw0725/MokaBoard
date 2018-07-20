@@ -14,4 +14,17 @@
 		values(#{userid}, #{userpw}, #{username}, #{email})
 	</insert>
 	
+	<select id="selectMember" resultType="com.hanumoka.mokaboard.vo.MemberVO">
+		select * from 
+		tbl_member
+		where userid = #{userid}
+	</select>
+	
+	<selelct id="readWithPW" resultType="com.hanumoka.mokaboard.vo.MemberVO">
+		select * from 
+		tbl_member
+		where 
+			userid = #{userid} and userpw = #{userpw}
+	</selelct>
+	
 </mapper>
