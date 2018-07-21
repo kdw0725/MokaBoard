@@ -401,7 +401,7 @@
         </div>
       </div>
     </div>
-
+<!-- 깃 테스트 용 추가 주석 -->
     <!-- Bootstrap core JavaScript -->
     <script src="<c:url value='/resources/vendor/jquery/jquery.min.js' />"></script>
     <script src="<c:url value='/resources/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
