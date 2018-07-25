@@ -19,12 +19,10 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	/* Mokaboard 작업 home 화면 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		/*logger.info("Welcome home! The client locale is {}.", locale);*/
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -37,9 +35,9 @@ public class HomeController {
 	}
 	
 	
+	/* Mokaboard index 화면 */
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -50,6 +48,34 @@ public class HomeController {
 		
 		return "index";
 	}
+	
+	/* Mokaboard login 화면 */
+/*	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "login";
+	}*/
+	
+	/* Mokaboard register 화면 */
+/*	@RequestMapping(value = {"/register"}, method = RequestMethod.GET)
+	public String register(Locale locale, Model model) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "register";
+	}*/
 	
 	
 }
