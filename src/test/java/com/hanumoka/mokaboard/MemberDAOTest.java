@@ -22,16 +22,17 @@ public class MemberDAOTest {
 	
 	@Test
 	public void testTime() throws Exception{
-		System.out.println("======= :" + memberDAO.getTime());
+		System.out.println("Log4j 동작 테스트");
+		System.out.println("DB 시간:" + memberDAO.getTime());
 	}
 	
 	@Test
 	public void testInsertMember() throws Exception{
 		MemberVO vo = new MemberVO();
-		vo.setUserid("user09");
-		vo.setUserpw("user09");
-		vo.setUsername("USER09");
-		vo.setEmail("user09@aaa.com");
+		vo.setUserid("user10");
+		vo.setUserpw("user10");
+		vo.setUsername("USER10");
+		vo.setEmail("user10@aaa.com");
 		
 		memberDAO.insertMember(vo);
 	}
