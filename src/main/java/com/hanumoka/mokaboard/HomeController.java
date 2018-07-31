@@ -36,7 +36,7 @@ public class HomeController {
 	
 	
 	/* Mokaboard index 화면 */
-	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+/*	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
 		
 		Date date = new Date();
@@ -47,7 +47,7 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "index";
-	}
+	}*/
 	
 	/* Mokaboard login 화면 */
 /*	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
