@@ -1,3 +1,7 @@
+-- docker stop $(docker ps -a -q)
+-- docker-compose start
+
+
 create table tbl_member (
 	userid varchar(50) not null,
     userpw varchar(50) not null,

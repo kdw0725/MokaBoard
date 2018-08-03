@@ -52,6 +52,7 @@
 		<beans:property name="characterEncoding" value="UTF-8" />
 		<beans:property name="order" value="1" />
 	</beans:bean>
+	
+	<context:component-scan base-package="com.hanumoka.mokaboard, com.hanumoka.sample" /> 
 
-	<context:component-scan base-package="com.hanumoka.mokaboard, com.hanumoka.sample" /> <!-- 이게 왜 root-context에 있으면 안되지? -->
 </beans:beans>

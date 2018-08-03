@@ -27,10 +27,21 @@
 		<property name="password" value="password"></property>
 	</bean>
 
+<!-- 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*.xml"></property> MyBatis mapper 경로 지정한다.
+	</bean> -->
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property> <!-- MyBatis mapper 경로럴 지정한다. -->
+		<property name="mapperLocations">
+			 <array>
+			   <value>classpath:mappers/**/*.xml</value>
+			   <value>classpath:sampleMappers/**/*.xml</value>
+			  </array>
+		</property>
 	</bean>
 	
 	<!-- SqlSessionTemplate은 MyBatis의 SqlSession인터페이스를 구현한 클래스로 기본적인 트랜잭션의 관리나 쓰레드 처리의 안정성 등을 보장해주고, 데이터베이스의 연겨로가 종료를 책임진다. -->
@@ -38,6 +49,6 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
-	<context:component-scan base-package="com.hanumoka.mokaboard" />
+	<context:component-scan base-package="com.hanumoka.mokaboard, com.hanumoka.sample" /> 
 
 </beans>
