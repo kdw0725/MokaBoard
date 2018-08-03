@@ -25,21 +25,18 @@
 		name="suffix" value=".jsp" /> </beans:bean> -->
 
 	<!-- thymeleaf View 설정 -->
-	<beans:bean id="templateResolver"
-		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+	<beans:bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
-		<beans:property name="templateMode" value="HTML5" />
+		<beans:property name="templateMode" value="HTML" />
 		<beans:property name="characterEncoding" value="UTF-8" />
 		<beans:property name="cacheable" value="false" />
 	</beans:bean>
 
 
 	<!-- thymeleaf laytout을 쓰기위해 3rd Party 추가 -->
-	<beans:bean id="templateEngine"
-		class="org.thymeleaf.spring4.SpringTemplateEngine">
-		<beans:property name="templateResolver"
-			ref="templateResolver" />
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<beans:property name="templateResolver" ref="templateResolver" />
 		<beans:property name="additionalDialects">
 			<beans:set>
 				<beans:bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
@@ -51,12 +48,10 @@
 	<!-- thymeleaf laytout ViewResolver 설정 -->
 	<beans:bean
 		class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-		<beans:property name="templateEngine"
-			ref="templateEngine" />
+		<beans:property name="templateEngine" ref="templateEngine" />
 		<beans:property name="characterEncoding" value="UTF-8" />
 		<beans:property name="order" value="1" />
 	</beans:bean>
 
-	<context:component-scan
-		base-package="com.hanumoka.mokaboard" /> <!-- 이게 왜 root-context에 있으면 안되지? -->
+	<context:component-scan base-package="com.hanumoka.mokaboard, com.hanumoka.sample" /> <!-- 이게 왜 root-context에 있으면 안되지? -->
 </beans:beans>

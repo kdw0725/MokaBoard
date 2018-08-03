@@ -1,4 +1,4 @@
-package com.hanumoka.mokaboard;
+package com.hanumoka.mokaboard.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
