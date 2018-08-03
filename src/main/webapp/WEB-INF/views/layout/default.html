@@ -1,13 +1,57 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head th:replace="fragments/config :: configFragment"></head>
+<head th:replace="fragments/head :: headFragment"></head>
 
-<header th:replace="fragments/header :: headerFragment"></header>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
 
-<div layout:fragment="content"></div>
-
-<footer th:replace="fragments/footer:: footerFragment"></footer>
-
+		<header th:replace="fragments/header :: headerFragment"></header>
+		
+		<aside th:replace="fragments/leftAside :: leftAsideFragment"></aside>
+	
+		<div layout:fragment="content"></div>  <!-- 실제 콘텐츠  -->
+	
+		<footer th:replace="fragments/footer:: footerFragment"></footer>
+		
+		<div th:replace="fragments/controlDiv :: controlDivFragment"></div> <!-- 모바일 버전에서 하단과 우측에 나오는 사이즈 조정바 -->
+	
+	</div>
+	<!-- ./wrapper -->
+	
+	<!-- REQUIRED JS SCRIPTS -->
+	
+	<!-- jQuery 3 -->
+	<script th:src="@{/resources/bower_components/jquery/dist/jquery.min.js}"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script th:src="@{/resources/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{/resources/dist/js/adminlte.min.js}"></script>
+	
+	<!-- Optionally, you can add Slimscroll and FastClick plugins.
+	     Both of these plugins are recommended to enhance the
+	     user experience. -->
+</body>
 </html>
