@@ -198,7 +198,7 @@
 		</dependency>
 
 
-		<!-- Thymeleaf lagacy html5를 위한 라이브러리 -->
+		<!-- Thymeleaf lagacy html5를 위한 라이브러리 , 이건 스프링 부트 용인듯 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
