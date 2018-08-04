@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hanumoka.sample.service.BoardService;
@@ -43,7 +45,7 @@ public class SampleBoardController {
 		rttr.addFlashAttribute("msg", "success");
 		
 		//return "/samples/board/success";
-		return "redirect:/samplehome/board/list";
+		return "redirect:/samplehome/board/listAll";
 	}
 	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
@@ -56,15 +58,64 @@ public class SampleBoardController {
 		return "/samples/board/list";
 	}
 	
-	@RequestMapping(value = "/mod", method = RequestMethod.GET)
-	public String mod(Locale locale, Model model) {
-		return "/samples/board/mod";
-	}
-	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String read(Locale locale, Model model) {
+	public String read(@RequestParam("bno") int bno, Model model) throws Exception {
+		
+		logger.info("sampleboard read bno:" + bno);
+		
+		model.addAttribute("boardVO", service.read(bno));
 		return "/samples/board/read";
 	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modifyGET(@RequestParam("bno") int bno, Model model) throws Exception {
+		
+		logger.info("sampleboard read bno:" + bno);
+		
+		model.addAttribute("boardVO", service.read(bno));
+		return "/samples/board/modify";
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+		logger.info("modify post......");
+		logger.info(board.toString());
+		
+		service.modify(board);
+		
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/samplehome/board/listAll";
+	}
+	
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String removePOST(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
+		logger.info("remove post......");
+		
+		service.remove(bno);
+		
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/samplehome/board/listAll";
+	}
+	
+/*	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
+		
+		service.remove(bno);
+		
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/samplehome/board/listAll";
+	}*/
+	
+	
+
+	
+	
+	
+	
+	
 	
 	
 	
