@@ -80,12 +80,12 @@ $(function () {
                 </tr>
                 </thead>
                 <tbody>
-              		<tr th:each="prod : ${list}">
-	                  <td th:text="${prod.bno}">BNO</td>
-	                  <td th:text="${prod.title}">TITLE</td>
-	                  <td th:text="${prod.writer}">WRITER</td>
-	                  <td th:text="${#dates.format(prod.regdate, 'yyyy-MM-dd HH:mm')}">REGDATE</td>
-	                  <td th:text="${prod.viewcnt}">VIEWCNT</td>
+              		<tr th:each="boardVO : ${list}">
+	                  <td th:text="${boardVO.bno}">BNO</td>
+	                  <td><a th:href="@{/samplehome/board/read(bno=${boardVO.bno})}" th:text="${boardVO.title}">TITLE</a></td>
+	                  <td th:text="${boardVO.writer}">WRITER</td>
+	                  <td th:text="${#dates.format(boardVO.regdate, 'yyyy-MM-dd HH:mm')}">REGDATE</td>
+	                  <td th:text="${boardVO.viewcnt}">VIEWCNT</td>
 	                </tr>
                 </tbody>
                 <tfoot>
