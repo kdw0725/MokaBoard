@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko" 
+<html th:lang = "ko"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head th:replace="fragments/head :: headFragment"></head>
+<head th:replace="fragments/head :: headFragment">
+	<title layout:title-pattern="$CONTENT_TITLE">TITLE</title>
+</head>
 
 <!--
 BODY TAG OPTIONS:
