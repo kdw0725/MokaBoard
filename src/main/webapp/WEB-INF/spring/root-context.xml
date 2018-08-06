@@ -49,6 +49,9 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
-	<context:component-scan base-package="com.hanumoka.mokaboard, com.hanumoka.sample" /> 
+	<context:component-scan base-package="com.hanumoka.mokaboard, com.hanumoka.sample" >
+		<!-- <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" /> -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan> 
 
 </beans>
