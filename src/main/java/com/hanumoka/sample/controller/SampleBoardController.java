@@ -54,7 +54,7 @@ public class SampleBoardController {
 		
 		model.addAttribute("list", service.listAll());
 		
-		double e1 = 1 / 0;
+		//double e1 = 1 / 0;
 		
 		
 		return "/samples/board/list";

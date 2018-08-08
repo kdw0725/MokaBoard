@@ -3,16 +3,11 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	data-layout-decorate="~{samples/layout/sampleLayout}"
 	>
-
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-</th:block>
-
-
-<!-- 사용자 스크립트 추가 -->
-<th:block layout:fragment="script">
+	
+<head>
+<title>게시판예제</title>
 <script th:inline="javascript">
-/*<![CDATA[*/
+
 $(function () {
 	
 	var result =/*[[${msg}]]*/ 'default';
@@ -36,9 +31,9 @@ $(function () {
     
   });
 
-/*]]>*/
 </script>
-</th:block>
+</head>
+
 
 
 
