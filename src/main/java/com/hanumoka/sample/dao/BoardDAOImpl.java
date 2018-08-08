@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.hanumoka.sample.vo.BoardVO;
+import com.hanumoka.sample.vo.Criteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -41,5 +42,31 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> listAll() throws Exception {
 		return session.selectList(namespace + "listAll");
 	}
+
+	//게시판 페이징
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		
+		if(page <= 0) {
+			page = 1;
+		}
+		
+		page = (page -1) * 10;
+		
+		return session.selectList(namespace + "listPage", page);
+	}
+
+	//Criteria 를 적용한 게시판 페이징 조회
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+		return session.selectList(namespace + "listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace + "countPaging", cri);
+	}
+	
+	
 
 }

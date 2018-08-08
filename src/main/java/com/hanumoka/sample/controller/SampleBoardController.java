@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hanumoka.sample.service.BoardService;
 import com.hanumoka.sample.vo.BoardVO;
+import com.hanumoka.sample.vo.Criteria;
+import com.hanumoka.sample.vo.PageMaker;
 
 
 @Controller
@@ -54,11 +57,38 @@ public class SampleBoardController {
 		
 		model.addAttribute("list", service.listAll());
 		
-		//double e1 = 1 / 0;
-		
-		
-		return "/samples/board/list";
+		return "/samples/board/listAll";
 	}
+	
+	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
+	public String listCri(Criteria cri, Model model) throws Exception {
+		
+		logger.info("show listCri........");
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		
+		return "/samples/board/listCri";
+	}
+	
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public String listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		
+		logger.info(cri.toString());
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		//pageMaker.setTotalCount(131);  //테스트를 위해 임의로 지정;
+		
+		System.out.println("==============");
+		System.out.println(pageMaker.toString());
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "/samples/board/listPage";
+	}
+	
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(@RequestParam("bno") int bno, Model model) throws Exception {
@@ -100,6 +130,7 @@ public class SampleBoardController {
 		
 		return "redirect:/samplehome/board/listAll";
 	}
+	
 	
 /*	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {

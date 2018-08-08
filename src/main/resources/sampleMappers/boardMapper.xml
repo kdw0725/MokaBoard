@@ -10,7 +10,7 @@
 		values(#{title}, #{content}, #{writer})
 	</insert>
 	
-	<select id="read" resultType="com.hanumoka.sample.vo.BoardVO">
+	<select id="read" resultType="BoardVO">
 		select
 			bno, title, content, writer, regdate, viewcnt
 		from
@@ -27,7 +27,7 @@
 		delete from tbl_board where bno = #{bno}
 	</delete>
 	
-	<select id="listAll" resultType="com.hanumoka.sample.vo.BoardVO">
+	<select id="listAll" resultType="BoardVO">
 		<![CDATA[
 			select
 				bno, title, content, writer, regdate, viewcnt
@@ -37,4 +37,41 @@
 			order by bno desc, regdate desc
 		]]>
 	</select>
+	
+	<!-- 게시판 페이징  -->
+	<select id="listPage" resultType="BoardVO">
+		<![CDATA[
+			select
+				bno, title, content, writer, regdate, viewcnt
+			from
+				tbl_board
+			where bno > 0
+			order by bno desc, regdate desc
+			limit #{page}, 10
+		]]>
+	</select>
+	
+	<!-- criteria 를 적용한 게시판 페이징 조회 -->
+	<select id="listCriteria" resultType="BoardVO">
+	<![CDATA[
+			select
+				bno, title, content, writer, regdate, viewcnt
+			from
+				tbl_board
+			where bno > 0
+			order by bno desc, regdate desc
+			limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="countPaging" resultType="int">
+	<![CDATA[
+			select
+				count(bno)
+			from
+				tbl_board
+			where bno > 0
+		]]>
+	</select>
+	
 </mapper>

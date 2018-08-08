@@ -56,3 +56,17 @@ select
 				tbl_board
 			where bno > 0
 			order by bno desc, regdate desc;
+            
+            
+/* 게시판 페이징 처리 용 쿼리 시작 */
+
+select * from tbl_board 
+where bno > 0 
+order by bno desc 
+limit 0, 10;     
+
+select * from tbl_board 
+where bno > 0 
+order by bno desc 
+limit 10, 10;          
+

@@ -1,5 +1,7 @@
 package com.hanumoka.sample;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hanumoka.sample.dao.BoardDAO;
 import com.hanumoka.sample.vo.BoardVO;
+import com.hanumoka.sample.vo.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
@@ -49,4 +52,34 @@ public class BoardDAOTest {
 		dao.delete(1);
 	}
 	
+	//게시판 페이징 조회 테스튼
+	@Test
+	public void testListPage() throws Exception{
+		
+		int page = 3;
+		
+		List<BoardVO> list = dao.listPage(page);
+		
+		for(BoardVO boardVO : list) {
+			logger.info(boardVO.getBno() + ":" + boardVO.getTitle());
+		}
+	}
+	
+	//Criteria를 페이징 적용한 게시판 테스트
+	@Test
+	public void testListCritera() throws Exception{
+		
+		Criteria cri = new Criteria();
+		cri.setPage(1);
+		cri.setPerPageNum(20);
+		
+		logger.info("cri 값: " +cri.toString());
+		
+		List<BoardVO> list = dao.listCriteria(cri);
+		
+		for(BoardVO boardVO : list) {
+			logger.info(boardVO.getBno() + " : " + boardVO.getTitle());
+		}
+		
+	}
 }
