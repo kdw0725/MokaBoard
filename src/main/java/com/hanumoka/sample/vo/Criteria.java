@@ -4,7 +4,7 @@ package com.hanumoka.sample.vo;
 //Criteria : 사전적 의미로는 검색기준, 분류기준 , 검색어도 관리한다.
 public class Criteria {
 
-	private int page;  // 시작 페이지 번호
+	private int page;  // 보여줄 페이지 번호
 	private int perPageNum;  // 한번에 보여줄 글의 개수
 	
 	public Criteria() {

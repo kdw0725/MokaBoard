@@ -1,7 +1,5 @@
 package com.hanumoka.sample.controller;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -42,82 +40,65 @@ public class SampleBoardController {
 		
 		service.regist(board);
 		
-		//model.addAttribute("result", "success");
-		
 		rttr.addFlashAttribute("msg", "success");
-		
-		//return "/samples/board/success";
-		return "redirect:/samplehome/board/listAll";
+		return "redirect:/samplehome/board/listPage";
 	}
 	
-	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
-	public String listAll(Locale locale, Model model) throws Exception {
-		
-		logger.info("show all list........");
-		
-		model.addAttribute("list", service.listAll());
-		
-		return "/samples/board/listAll";
-	}
 	
-	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
-	public String listCri(Criteria cri, Model model) throws Exception {
-		
-		logger.info("show listCri........");
-		
-		model.addAttribute("list", service.listCriteria(cri));
-		
-		return "/samples/board/listCri";
-	}
 	
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public String listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		
+		System.out.println("==============");
+		System.out.println("cri:" + cri.toString());
+		
 		logger.info(cri.toString());
 		
-		model.addAttribute("list", service.listCriteria(cri));
+		model.addAttribute("list", service.listCriteria(cri));  // 게시판의 글 리스트
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
 		//pageMaker.setTotalCount(131);  //테스트를 위해 임의로 지정;
 		
-		System.out.println("==============");
-		System.out.println(pageMaker.toString());
 		
-		model.addAttribute("pageMaker", pageMaker);
+		System.out.println("pageMaker:" + pageMaker.toString());
+		
+		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		
 		return "/samples/board/listPage";
 	}
 	
-	
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String read(@RequestParam("bno") int bno, Model model) throws Exception {
+	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
+	public String readPage(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		
 		logger.info("sampleboard read bno:" + bno);
 		
 		model.addAttribute("boardVO", service.read(bno));
-		return "/samples/board/read";
+		return "/samples/board/readPage";
 	}
 	
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String modifyGET(@RequestParam("bno") int bno, Model model) throws Exception {
-		
-		logger.info("sampleboard read bno:" + bno);
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
+	public String modifyPageGET(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri ,Model model) throws Exception {
 		
 		model.addAttribute("boardVO", service.read(bno));
-		return "/samples/board/modify";
+		return "/samples/board/modifyPage";
 	}
 	
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
+	public String modifyPagePOST(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception {
+		
+		System.out.println("========== modifyPagePOST");
+		
 		logger.info("modify post......");
 		logger.info(board.toString());
 		
 		service.modify(board);
 		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/samplehome/board/listAll";
+		return "redirect:/samplehome/board/listPage";
 	}
 	
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -128,8 +109,22 @@ public class SampleBoardController {
 		
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/samplehome/board/listAll";
+		return "redirect:/samplehome/board/listPage";
 	}
+	
+	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
+	public String removePagePOST(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) throws Exception {
+		logger.info("removePage post......");
+		
+		service.remove(bno);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/samplehome/board/listPage";
+	}
+	
 	
 	
 /*	@RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -142,10 +137,56 @@ public class SampleBoardController {
 		return "redirect:/samplehome/board/listAll";
 	}*/
 	
+	/*@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public String listAll(Locale locale, Model model) throws Exception {
+		
+		logger.info("show all list........");
+		
+		model.addAttribute("list", service.listAll());
+		
+		return "/samples/board/listAll";
+	}*/
 	
+	/*@RequestMapping(value = "/listCri", method = RequestMethod.GET)
+	public String listCri(Criteria cri, Model model) throws Exception {
+		
+		logger.info("show listCri........");
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		
+		return "/samples/board/listCri";
+	}*/
 
 	
+	/*@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modifyGET(@RequestParam("bno") int bno, Model model) throws Exception {
+		
+		logger.info("sampleboard read bno:" + bno);
+		
+		model.addAttribute("boardVO", service.read(bno));
+		return "/samples/board/modify";
+	}*/
 	
+	/*@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+		logger.info("modify post......");
+		logger.info(board.toString());
+		
+		service.modify(board);
+		
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/samplehome/board/listPage";
+	}*/
+	
+	/*@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(@RequestParam("bno") int bno, Model model) throws Exception {
+		
+		logger.info("sampleboard read bno:" + bno);
+		
+		model.addAttribute("boardVO", service.read(bno));
+		return "/samples/board/read";
+	}*/
 	
 	
 	

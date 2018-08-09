@@ -13,16 +13,13 @@ $(function () {
 	var result =/*[[${msg}]]*/ 'default';
 	
 	if(result == 'success'){
-		alert("처리가 완료되었습니다.");
+		alert("처리가 완료되었습니다. result:" + result);
 	}
 	
-    
   });
 
 </script>
 </head>
-
-
 
 
 <div layout:fragment="content">
@@ -74,7 +71,7 @@ $(function () {
                 
                 <tr th:each="boardVO : ${list}">
 	                  <td th:text="${boardVO.bno}">BNO</td>
-	                  <td><a th:href="@{/samplehome/board/read(bno=${boardVO.bno})}" th:text="${boardVO.title}">TITLE</a></td>
+	                  <td><a th:href="@{/samplehome/board/readPage(bno=${boardVO.bno},page=${pageMaker.cri.page},perPageNum=${pageMaker.cri.perPageNum})}" th:text="${boardVO.title}">TITLE</a></td>
 	                  <td th:text="${boardVO.writer}">WRITER</td>
 	                  <td th:text="${#dates.format(boardVO.regdate, 'yyyy-MM-dd HH:mm')}">REGDATE</td>
 	                  <td th:text="${boardVO.viewcnt}">VIEWCNT</td>
@@ -90,15 +87,15 @@ $(function () {
               <ul class="pagination pagination-sm no-margin pull-right">
               
               <li th:if="${pageMaker.prev} == true">
-              	<a th:href="@{/samplehome/board/listPage(page=${pageMaker.startPage}-1)}">&laquo;</a>
+              	<a th:href="@{/samplehome/board/listPage(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&laquo;</a>
               </li>
               
-              <li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"  th:classappend="${pageMaker.cri.page} == ${idx} ? active : userclass">
-                <a th:href="@{/samplehome/board/listPage(page=${idx})}" th:text="${idx}"></a>
+              <li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"  th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
+                <a th:href="@{/samplehome/board/listPage(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}" th:text="${idx}"></a>
               </li>
                 
               <li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
-              	<a th:href="@{/samplehome/board/listPage(page=${pageMaker.endPage}+1)}">&raquo;</a>
+              	<a th:href="@{/samplehome/board/listPage(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&raquo;</a>
               </li>
               
               </ul>

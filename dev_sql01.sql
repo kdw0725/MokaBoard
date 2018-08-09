@@ -68,5 +68,25 @@ limit 0, 10;
 select * from tbl_board 
 where bno > 0 
 order by bno desc 
-limit 10, 10;          
+limit 10, 10;    
+
+/* 게시판 데이터 불리기  */
+
+insert into tbl_board(title, content, writer)
+(select title, content, writer from tbl_board);
+
+select count(*) from tbl_board;
+      
+select
+				bno, title, content, writer, regdate, viewcnt
+			from
+				tbl_board
+			where bno > 0
+			order by bno desc, regdate desc
+limit 0, 20;    
+
+
+select * from tbl_board where bno > 0 order by bno asc
+limit 0, 10;
+;
 

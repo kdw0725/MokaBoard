@@ -13,13 +13,13 @@ $(function () {
 	console.log(formObj);
 	
 	$(".btn-warning").on("click", function(){
-		formObj.attr("action", "/samplehome/board/modify");
+		formObj.attr("action", "/samplehome/board/modifyPage");
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
 	
 	$(".btn-danger").on("click", function(){
-		formObj.attr("action", "/samplehome/board/remove");
+		formObj.attr("action", "/samplehome/board/removePage");
 		formObj.submit();
 	});
 	
@@ -46,7 +46,7 @@ $(function () {
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 게시판</a></li>
-        <li class="active">read</li>
+        <li class="active">readPage</li>
       </ol>
     </section>
 
@@ -66,6 +66,8 @@ $(function () {
             <form role="form" method="post">
               <div class="box-body" th:object="${boardVO}">
               	<input th:field="*{bno}" type="hidden"  >
+              	<input th:field="${cri.page}" type="hidden"  >  <!-- 현제 페이지 번호 -->
+              	<input th:field="${cri.perPageNum}" type="hidden"  > <!-- 한번에 보여줄 페이지 개수 -->
                 <div class="form-group">
                   <label for="exampleInputBoardTitle">Title</label>
                   <input th:value="*{title}" type="text" class="form-control" id="exampleInputBoardTitle"  readonly="readonly">
@@ -82,9 +84,13 @@ $(function () {
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-warning">Modify</button>
+                <!-- <button type="submit" class="btn btn-warning">Modify</button>
                 <button type="submit" class="btn btn-danger">Remove</button>
-                <button type="submit" class="btn btn-primary">ListPage</button>
+                <button type="submit" class="btn btn-primary">ListPage</button> -->
+                
+                <button type="button" class="btn btn-warning">Modify</button>
+                <button type="button" class="btn btn-danger">Remove</button>
+                <button type="button" class="btn btn-primary">ListPage</button>
               </div>
             </form>
           </div>
