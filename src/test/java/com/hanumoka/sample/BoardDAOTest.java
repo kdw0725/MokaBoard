@@ -55,7 +55,7 @@ public class BoardDAOTest {
 	}
 	
 	//게시판 페이징 조회 테스튼
-	@Test
+	/*@Test
 	public void testListPage() throws Exception{
 		
 		int page = 3;
@@ -65,7 +65,7 @@ public class BoardDAOTest {
 		for(BoardVO boardVO : list) {
 			logger.info(boardVO.getBno() + ":" + boardVO.getTitle());
 		}
-	}
+	}*/
 	
 	//Criteria를 페이징 적용한 게시판 테스트
 	@Test

@@ -38,13 +38,13 @@ public class BoardDAOImpl implements BoardDAO {
 		session.delete(namespace + "delete", bno);
 	}
 
-	@Override
+/*	@Override
 	public List<BoardVO> listAll() throws Exception {
 		return session.selectList(namespace + "listAll");
-	}
+	}*/
 
 	//게시판 페이징
-	@Override
+/*	@Override
 	public List<BoardVO> listPage(int page) throws Exception {
 		
 		if(page <= 0) {
@@ -54,7 +54,7 @@ public class BoardDAOImpl implements BoardDAO {
 		page = (page -1) * 10;
 		
 		return session.selectList(namespace + "listPage", page);
-	}
+	}*/
 
 	//Criteria 를 적용한 게시판 페이징 조회
 	@Override

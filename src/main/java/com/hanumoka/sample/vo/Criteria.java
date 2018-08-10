@@ -4,10 +4,11 @@ package com.hanumoka.sample.vo;
 //Criteria : 사전적 의미로는 검색기준, 분류기준 , 검색어도 관리한다.
 public class Criteria {
 
-	private int page;  // 보여줄 페이지 번호
-	private int perPageNum;  // 한번에 보여줄 글의 개수
+	private int page;  		    // 보여줄 페이지 번호
+	private int perPageNum;  // 페이지당 보여줄 게시글의 개수
 	
 	public Criteria() {
+		//최초 게시판에 진입할 때를 위해서 기본 값을 설정 해야 한다.
 		this.page = 1;
 		this.perPageNum = 10;
 	}
@@ -50,8 +51,6 @@ public class Criteria {
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
-	
-	
 	
 	
 	

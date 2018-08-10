@@ -15,10 +15,10 @@ public interface BoardDAO {
 	
 	public void delete(Integer bno) throws Exception;
 	
-	public List<BoardVO> listAll() throws Exception;
+	/*public List<BoardVO> listAll() throws Exception;*/
 	
 	//게시판 페이징 
-	public List<BoardVO> listPage(int page) throws Exception; 
+	/*public List<BoardVO> listPage(int page) throws Exception; */
 	
 	//게시판 페이징용 Criteria
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
