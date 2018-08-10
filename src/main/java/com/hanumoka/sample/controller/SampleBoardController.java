@@ -49,19 +49,12 @@ public class SampleBoardController {
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public String listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		
-		System.out.println("==============");
-		System.out.println("cri:" + cri.toString());
-		
 		logger.info(cri.toString());
 		
 		model.addAttribute("list", service.listCriteria(cri));  // 게시판의 글 리스트
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
-		//pageMaker.setTotalCount(131);  //테스트를 위해 임의로 지정;
-		
-		
-		System.out.println("pageMaker:" + pageMaker.toString());
 		
 		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		

@@ -38,7 +38,7 @@
 		]]>
 	</select>
 	
-	<!-- 게시판 페이징  -->
+	<!-- 게시판 페이징 : 테스트  -->
 	<select id="listPage" resultType="BoardVO">
 		<![CDATA[
 			select
