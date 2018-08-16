@@ -80,8 +80,6 @@ public class SampleBoardController {
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
 	public String modifyPagePOST(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception {
 		
-		System.out.println("========== modifyPagePOST");
-		
 		logger.info("modify post......");
 		logger.info(board.toString());
 		
