@@ -28,7 +28,7 @@ public class SampleCommonExceptionAdvice {
 		logger.info(e.toString());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/samples/errors/error_common");
+		mav.setViewName("/sample/errors/error_common");
 		mav.addObject("exception", e);  //예외를 뷰에 던져서 주자.
 		
 		return mav;

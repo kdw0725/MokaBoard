@@ -7,10 +7,15 @@ public class Criteria {
 	private int page;  		    // 보여줄 페이지 번호
 	private int perPageNum;  // 페이지당 보여줄 게시글의 개수
 	
+	private String searchType;  //검색의 종류
+	private String keyword;      //검색의 키워드
+	
 	public Criteria() {
 		//최초 게시판에 진입할 때를 위해서 기본 값을 설정 해야 한다.
 		this.page = 1;
 		this.perPageNum = 10;
+		this.searchType = null;
+		this.keyword = null;
 	}
 
 	public int getPage() {
@@ -51,6 +56,24 @@ public class Criteria {
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
+	
 	
 	
 	
