@@ -7,6 +7,12 @@
 # 개요
 스프링 공부용 
 
+# URL
+
+/
+/home
+/sample
+
 
 # 개발환경
 windows 10 pro(64)  
