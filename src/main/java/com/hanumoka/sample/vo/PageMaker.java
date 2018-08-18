@@ -1,5 +1,8 @@
 package com.hanumoka.sample.vo;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 //게시판 페이징 하단 부문 담당
 public class PageMaker {
 
@@ -91,6 +94,12 @@ public class PageMaker {
 	public String toString() {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
+	}
+	
+	
+	public String makeQuery(int page) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("perpageNum", cri.getPerPageNum()).build();
+		return uriComponents.toUriString();
 	}
 	
 	

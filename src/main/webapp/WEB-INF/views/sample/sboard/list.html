@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{sample/layout/sampleLayout}">
+
+<head>
+<title>게시판+페이징+검색</title>
+<script th:inline="javascript">
+
+$(function () {
+	
+	var formObj = $("form[role='form']");
+	
+	var result =/*[[${msg}]]*/ 'default';
+	
+	if(result == 'success'){
+		alert("처리가 완료되었습니다. result:" + result);
+	}
+	
+	/*
+		검색버튼 
+		1.사용자는 새로운 검색을 시도한다. 기존의 페이징이나 검색이 아닌 새로운 검색을 시도하는 경우에만 검색 버튼을 사용한다.
+		2.검색 버튼의 클릭은 1페이지의 데이터를 의미한다.
+	*/
+	$("#searchBtn").on("click", function(event){
+		
+		formObj.attr("action", "/sample/sboard/list");
+		formObj.attr("method", "get");
+		formObj.submit();
+		
+	});
+	
+	$("#newBtn").on("click", function(){
+		
+		formObj.attr("action", "/sample/sboard/register");
+		formObj.attr("method", "get");
+		formObj.submit();
+	});
+	
+  });
+
+</script>
+</head>
+
+
+<div layout:fragment="content">
+
+
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				게시판 페이징 적용 <small>advanced tables</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#">Tables</a></li>
+				<li class="active">Data tables</li>
+			</ol>
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+					<form role="form" method="get">
+						<div class="box-header with-border">
+							<h3 class="box-title">게시판 + 페이징</h3>
+							
+							<div class="box-tools">
+							
+								<input th:field="${cri.page}" type="hidden"  >  <!-- 현제 페이지 번호 -->
+								<input th:field="${cri.perPageNum}" type="hidden"  > <!-- 한번에 보여줄 페이지 개수 -->
+								<div class="input-group input-group-sm" style="width: 300px;">
+									
+
+									<!-- 검색옵션 -->
+									<div class="input-group-btn" >
+										<select name="searchType" class="form-control input-sm" style="width: 100px;">
+											<option value="n" th:selected="${cri.searchType==null or cri.searchType=='null' or cri.searchType==''}">---</option>
+											<option value="t" th:selected="${cri.searchType=='t'}">Title</option>
+											<option value="c" th:selected="${cri.searchType=='c'}">Content</option>
+											<option value="w" th:selected="${cri.searchType=='w'}">Writer</option>
+											<option value="tc" th:selected="${cri.searchType=='tc'}">Title OR Content</option>
+											<option value="cw" th:selected="${cri.searchType=='cw'}">Content OR Writer</option>
+											<option value="tcw" th:selected="${cri.searchType=='tcw'}">Title OR Content OR Writer</option>
+										</select>
+									</div>
+
+									<!-- 검색키워드 -->
+									<input type="text" name="keyword" id="keywordInput" th:value="${cri.keyword}" class="form-control pull-right" placeholder="Search">
+
+									<div class="input-group-btn">
+										<!-- 검색 버튼 -->
+										<button type="button" id="searchBtn" class="btn btn-default">
+											<i class="fa fa-search"></i>
+										</button>
+										<!-- 게시글 작성 버튼 -->
+										<button type="button" id="newBtn" class="btn btn-default">
+											<i class="fa fa-pencil"></i>
+										</button>
+									</div>
+								</div>
+						
+							</div>
+	
+						</div>
+						</form>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<table class="table table-bordered">
+								<tr>
+									<th style="width: 10px">BNO</th>
+									<th>TITLE</th>
+									<th style="width: 200px">WRITER</th>
+									<th style="width: 200px">REGDATE</th>
+									<th style="width: 40px">VIEWCNT</th>
+								</tr>
+
+								<tr th:each="boardVO : ${list}">
+									<td th:text="${boardVO.bno}">BNO</td>
+									<td><a
+										th:href="@{/sample/sboard/readPage(bno=${boardVO.bno},page=${pageMaker.cri.page},perPageNum=${pageMaker.cri.perPageNum},searchType=${pageMaker.cri.searchType},keyword=${pageMaker.cri.keyword})}"
+										th:text="${boardVO.title}">TITLE</a></td>
+									<td th:text="${boardVO.writer}">WRITER</td>
+									<td
+										th:text="${#dates.format(boardVO.regdate, 'yyyy-MM-dd HH:mm')}">REGDATE</td>
+									<td th:text="${boardVO.viewcnt}">VIEWCNT</td>
+								</tr>
+
+							</table>
+						</div>
+						<!-- /.box-body -->
+
+						<!-- 게시판 하단의 페이징 버튼 -->
+						<div class="box-footer clearfix">
+							<ul class="pagination pagination-sm no-margin pull-right">
+
+								<li th:if="${pageMaker.prev} == true"><a
+									th:href="@{/sample/sboard/list(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum},searchType=${pageMaker.cri.searchType},keyword=${pageMaker.cri.keyword})}">&laquo;</a>
+								</li>
+
+								<li
+									th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
+									th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
+									<a
+									th:href="@{/sample/sboard/list(page=${idx},perPageNum=${pageMaker.cri.perPageNum},searchType=${pageMaker.cri.searchType},keyword=${pageMaker.cri.keyword})}"
+									th:text="${idx}"></a>
+								</li>
+
+								<li
+									th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+									<a
+									th:href="@{/sample/sboard/list(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum},searchType=${pageMaker.cri.searchType},keyword=${pageMaker.cri.keyword})}">&raquo;</a>
+								</li>
+
+							</ul>
+
+						</div>
+					</div>
+					<!-- /.box -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+</div>
+
+
+</html>

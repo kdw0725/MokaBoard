@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{samples/layout/sampleLayout}"
+	data-layout-decorate="~{sample/layout/sampleLayout}"
 	>
 
 <!-- 사용자 CSS 추가 -->
@@ -18,7 +18,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        error_common
+        셈플 홈이다. 레이아웃이 적용 되는가?
         <small>Optional description</small>
       </h1>
       <ol class="breadcrumb">
@@ -30,15 +30,13 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
+		<h1>lagacy html5 태스트</h1><br>
+		<h1>나는 br태그를 닫고 싶지 않아.</h1><br>
+		<h1>바보야</h1> 
+
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        
-        <h4 th:text="${exception.getMessage()}"></h4>
-
-		<ul th:each="est : ${exception.getStackTrace()}">
-			<li th:text="${est.toString()}"></li>
-		</ul>
 
     </section>
     <!-- /.content -->

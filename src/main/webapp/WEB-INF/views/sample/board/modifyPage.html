@@ -1,8 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{samples/layout/sampleLayout}"
+	data-layout-decorate="~{sample/layout/sampleLayout}"
 	>
+
+<head>
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(function () {
+
+	
+	
+	$(".btn-primary").on("click", function(){
+		
+		var formObj = $("form[role='form']");
+		formObj.attr("action", "/samplehome/board/modifyPage");
+		formObj.attr("method", "post");
+		formObj.submit();
+	});
+	
+	$(".btn-warning").on("click", function(){
+		
+		var page =/*[[${cri.page}]]*/ '1';
+		var perPageNum =/*[[${cri.perPageNum}]]*/ '10';
+		self.location = "/samplehome/board/listPage?page=" + page + "&perPageNum=" + perPageNum;
+		
+	});
+    
+    
+  });
+
+/*]]>*/
+</script>
+</head>
+
 
 
 <div layout:fragment="content">
@@ -11,12 +42,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        게시판 입력
+        게시판 수정
         <small>Optional description</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 게시판</a></li>
-        <li class="active">register</li>
+        <li class="active">modify</li>
       </ol>
     </section>
 
@@ -29,29 +60,33 @@
         
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">REGISTER BOARD</h3>
+              <h3 class="box-title">MODIFY BOARD</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" method="post">
-              <div class="box-body">
+              <div class="box-body" th:object="${boardVO}">
+              	<input th:field="*{bno}" type="hidden"  >
+              	<input th:field="${cri.page}" type="hidden"  >  <!-- 현제 페이지 번호 -->
+              	<input th:field="${cri.perPageNum}" type="hidden"  > <!-- 한번에 보여줄 페이지 개수 -->
                 <div class="form-group">
                   <label for="exampleInputBoardTitle">Title</label>
-                  <input type="text" class="form-control" id="exampleInputBoardTitle" name="title" placeholder="Enter title">
+                  <input th:field="*{title}" type="text" class="form-control" id="exampleInputBoardTitle">
                 </div>
                 <div class="form-group">
                   <label>Content</label>
-                  <textarea name="content" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                  <textarea th:field="*{content}"  class="form-control" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBoardWriter">Writer</label>
-                  <input type="text" name="writer" class="form-control" id="exampleInputBoardWriter" placeholder="Enter Writer">
+                  <input th:field="*{writer}" type="text"  class="form-control" id="exampleInputBoardWriter">
                 </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              	<button type="submit" class="btn btn-primary">Submit</button>
+              	<button type="button" class="btn btn-warning">Cancel</button>
               </div>
             </form>
           </div>

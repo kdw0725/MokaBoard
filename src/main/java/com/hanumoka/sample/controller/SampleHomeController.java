@@ -20,7 +20,7 @@ public class SampleHomeController {
 	private static final Logger logger = LoggerFactory.getLogger(SampleHomeController.class);
 	
 	/* Mokaboard 작업 home 화면 */
-	@RequestMapping(value = "/samplehome", method = RequestMethod.GET)
+	@RequestMapping(value = {"/sample", "/sample/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		Date date = new Date();
@@ -30,7 +30,7 @@ public class SampleHomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/samples/sampleHome";
+		return "/sample/home";
 	}
 	
 	
