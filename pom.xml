@@ -59,6 +59,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -167,11 +168,11 @@
 		</dependency>
 
 		<!-- mybatis log4jdbc-log4j2 라이브러리 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- Thymeleaf 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->

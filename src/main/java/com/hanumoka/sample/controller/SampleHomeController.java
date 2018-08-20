@@ -23,6 +23,11 @@ public class SampleHomeController {
 	@RequestMapping(value = {"/sample", "/sample/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
+		logger.info("sample home log info");
+		logger.trace("sample home log trace");
+		logger.debug("sample home log debug");
+		logger.error("sample home log error");
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
