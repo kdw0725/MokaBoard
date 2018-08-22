@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.hanumoka.sample.dao.ReplyDAO;
+import com.hanumoka.sample.vo.Criteria;
 import com.hanumoka.sample.vo.ReplyVO;
 
 @Service
@@ -33,6 +34,16 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void removeReply(Integer rno) throws Exception {
 		dao.delete(rno);
+	}
+
+	@Override
+	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri) throws Exception {
+		return dao.listPage(bno, cri);
+	}
+
+	@Override
+	public int count(Integer bno) throws Exception {
+		return dao.count(bno);
 	}
 
 }

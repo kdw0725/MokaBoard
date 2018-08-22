@@ -27,4 +27,24 @@
 		delete from tbl_reply where rno =#{rno}
 	</delete>
 	
+	<select id="listPage" resultType="ReplyVO">
+		select
+		*
+		from
+		tbl_reply
+		where 1=1
+		and bno = #{bno}
+		order by rno desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="count" resultType="int">
+		select
+			count(*)
+		from
+		tbl_reply
+		where 1=1
+		and bno = #{bno}
+	</select>
+	
 </mapper>

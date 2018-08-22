@@ -97,6 +97,7 @@ public class PageMaker {
 	}
 	
 	
+	/* thymeleaf 때문에 쓸모가 없다. */
 	public String makeQuery(int page) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("perpageNum", cri.getPerPageNum()).build();
 		return uriComponents.toUriString();

@@ -1,6 +1,8 @@
 package com.hanumoka.sample.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hanumoka.sample.service.ReplyService;
+import com.hanumoka.sample.vo.Criteria;
+import com.hanumoka.sample.vo.PageMaker;
 import com.hanumoka.sample.vo.ReplyVO;
 
 @RestController
@@ -66,7 +70,6 @@ public class ReplyController {
 		
 		try {
 			vo.setRno(rno);
-			System.out.println(vo);
 			service.modifyReply(vo);
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -79,7 +82,54 @@ public class ReplyController {
 		return entity;
 	}
 	
+	/* 댓글 삭제 */
+	@RequestMapping(value = "/{rno}", method = {RequestMethod.DELETE})
+	public ResponseEntity<String> remove(@PathVariable("rno") Integer rno){
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.removeReply(rno);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 	
+	/* 댓글 페이징 */
+	@RequestMapping(value="/{bno}/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("bno") Integer bno, @PathVariable("page") Integer page){
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(page);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<ReplyVO> list = service.listReplyPage(bno, cri);
+			map.put("list", list);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			int replyCount = service.count(bno);
+			pageMaker.setTotalCount(replyCount);
+			
+			map.put("pageMaker", pageMaker);
+			
+			entity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.OK);
+		}
+		
+		return entity;
+	}
 	
 	
 }
