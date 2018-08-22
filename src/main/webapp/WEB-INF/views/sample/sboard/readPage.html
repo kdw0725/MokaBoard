@@ -16,12 +16,12 @@ $(function () {
 		formObj.submit();
 	});
 	
-	$(".btn-danger").on("click", function(){
+	$("#delBoardBtn").on("click", function(){
 		formObj.attr("action", "/sample/sboard/removePage");
 		formObj.submit();
 	});
 	
-	$(".btn-primary").on("click", function(){
+	$("#listBoardBtn").on("click", function(){
 		formObj.attr("action", "/sample/sboard/list");
 		formObj.attr("method", "get");
 		formObj.submit();
@@ -70,6 +70,7 @@ $(function () {
 		fn_getReplyList($("#bno").val(), replyPage);
 	});
 	
+	//댓글 등록
 	$("#replyAddBtn").on("click", function(){
 		
 		var ajaxParamObj = {
@@ -85,6 +86,55 @@ $(function () {
 		
 	});
 	
+	//댓글 수정
+	$("#replyModBtn").on("click", function(){
+		
+		var rno = $(".modal-title").html();
+		var replytext = $("#replyText").val();
+		
+		var ajaxParamObj = {
+				type : "put",
+				url: "/replies/" + rno,
+				data : { replytext: replytext},
+				successfn : function(result){
+					fn_getReplyList($("#bno").val(), 1);	
+					$("#replyModModalClose").trigger("click");
+				},
+		};
+		HANUAjaxCommon.callAjax(ajaxParamObj);
+	});
+	
+	//댓글 삭제
+	$("#replyDelBtn").on("click", function(){
+		
+		var rno = $(".modal-title").html();
+		
+		var ajaxParamObj = {
+				type : "delete",
+				url: "/replies/" + rno,
+				data : {},
+				successfn : function(result){
+					fn_getReplyList($("#bno").val(), 1);	
+					$("#replyModModalClose").trigger("click");
+				},
+		};
+		
+		HANUAjaxCommon.callAjax(ajaxParamObj);
+		
+	});
+	
+	
+	//댓글 수정 모달창 열때 데이터 채워주는 함수
+	$(".timeline").on("click", ".replyLi" ,function(event){
+		
+		var reply = $(this);
+		
+		$("#replyText").val(reply.find('.timeline-body').text());
+		$(".modal-title").html(reply.attr("data-rno"));
+		
+	});
+	
+	
 	//댓글 자동 조회
 	fn_getReplyList($("#bno").val(), 1);
     
@@ -95,7 +145,7 @@ $(function () {
 <!-- handlebar 템플릿 -->
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
-<li>
+<li class="replyLi" data-rno={{rno}}>
 <i class="fa fa-comments bg-yellow"></i>
 <div class="timeline-item">
 	<span class="time"><i class="fa fa-clock-o"></i> {{prettifyDate regdate}}</span>
@@ -104,13 +154,27 @@ $(function () {
 	</h3>
 	<div class="timeline-body">{{replytext}}</div>
 	<div class="timeline-footer">
-		<a class="btn btn-primary btn-xs">Modify</a>
+	 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">댓글수정</button>
 	</div>
 </div>
 </li>
 {{/each}}
 </script>
+<style>
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
 
+    .example-modal .modal {
+      background: transparent !important;
+    }
+  </style>
 </head>
 
 <div layout:fragment="content">
@@ -172,8 +236,8 @@ $(function () {
 
 					<div class="box-footer">
 						<button type="button" id="modBoardBtn" class="btn btn-warning">Modify</button>
-						<button type="button" class="btn btn-danger">Remove</button>
-						<button type="button" class="btn btn-primary">ListPage</button>
+						<button type="button" id="delBoardBtn" class="btn btn-danger">Remove</button>
+						<button type="button" id="listBoardBtn" class="btn btn-primary">ListPage</button>
 					</div>
 				</form>
 			</div>
@@ -215,5 +279,31 @@ $(function () {
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+
+	<!-- 댓글 수정 모달 -->
+	<div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">댓글 수정 모달</h4>
+              </div>
+              <div class="modal-body">
+                <!-- <p>One fine body&hellip;</p> -->
+                <p><input type="text" id="replyText" class="form-control"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" id="replyModModalClose" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" id="replyModBtn">Save changes</button>
+                <button type="button" class="btn btn-danger" id="replyDelBtn">Delete</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+     </div>
+     <!-- /.modal -->
+	
 </div>
 </html>

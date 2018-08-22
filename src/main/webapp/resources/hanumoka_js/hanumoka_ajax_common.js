@@ -2,17 +2,17 @@ var HANUAjaxCommon = (function(){
 	
 	var ajax = function(ajaxParamObj){
 		
-		var tmpType = ajaxParamObj.type.toLowerCase(); 
+		/*var tmpType = ajaxParamObj.type.toLowerCase(); 
 		var type = null;
 		
-		if(tmpType == "post" || tmpType == "delete" || tmpType == "patch"){
+		if(type == "post" || tmpType == "delete" || tmpType == "patch"){
 			type = "post";
 		}else if(tmpType == "get"){
 			type = "get";
-		}
+		}*/
 		
 		$.ajax({
-			type: type,
+			type: ajaxParamObj.type.toLowerCase(),
 			url: ajaxParamObj.url,
 			headers: {
 				"Content-type" : "application/json",
