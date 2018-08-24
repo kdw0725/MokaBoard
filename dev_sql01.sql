@@ -109,8 +109,12 @@ alter table tbl_reply add constraint fk_board foreign key (bno) references tbl_b
 select * from tbl_reply;
 
 insert into tbl_reply(bno, replytext, replyer)
-values(98295, '6번댓글', 'hanumoka');
+values(98295, '10번댓글', 'hanumoka');
 
+insert into tbl_reply(bno, replytext, replyer)
+(select bno, replytext, replyer from tbl_reply);
+
+commit;
 
 
 
