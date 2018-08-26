@@ -5,12 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hanumoka.sample.dao.BoardDAO;
 import com.hanumoka.sample.vo.BoardVO;
 import com.hanumoka.sample.vo.Criteria;
 
 @Service
+@Transactional
 public class BoardServiceImpl implements BoardService {
 	
 	@Inject

@@ -61,5 +61,13 @@
 	
 	<!-- XML 방식으로 AOP 기능을 설정할 때 사용 -->
 	<aop:config></aop:config>
+	
+	<!-- 트랜젝션 매니저 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- @Transactional 애노테이션을 이용하기 위한 설정 -->
+	<tx:annotation-driven/>
 
 </beans>
