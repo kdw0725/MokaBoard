@@ -38,5 +38,18 @@ public class SampleHomeController {
 		return "/sample/home";
 	}
 	
+	@RequestMapping(value = "/sample/doA", method = RequestMethod.GET)
+	public String doA(Locale locale, Model model) {
+		System.out.println("doA ---------------");
+		return "/sample/home";
+	}
+	
+	@RequestMapping(value = "/sample/doB", method = RequestMethod.GET)
+	public String doB(Locale locale, Model model) {
+		System.out.println("doB ---------------");
+		model.addAttribute("result", "DOB RESULT");
+		return "/sample/home";
+	}
+	
 	
 }

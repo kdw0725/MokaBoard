@@ -68,4 +68,35 @@
 		<beans:constructor-arg value="D:\\SpringUploadRepo\\upload"></beans:constructor-arg>
 	</beans:bean>
 	
+	<!-- 인터셉터 설정 -->
+<!-- 	<beans:bean id="sampleInterceptor" class="com.hanumoka.sample.interceptor.SampleInterceptor">
+	</beans:bean> -->
+	
+	<!-- /sample/doA /sample/doB가 호출될때  sampleInterceptor 가 동작하게 된다. -->
+<!-- 	<interceptors>
+		<interceptor>
+			<mapping path="/sample/doA" />
+			<mapping path="/sample/doB" />
+			<beans:ref bean="sampleInterceptor" />
+		</interceptor>
+	</interceptors> -->
+	
+ 	<beans:bean id="loginInterceptor" class="com.hanumoka.sample.interceptor.LoginInterceptor"></beans:bean>
+ 	
+ 	<beans:bean id="AuthInterceptor" class="com.hanumoka.sample.interceptor.AuthInterceptor"></beans:bean>
+	
+	<interceptors>
+		<!-- 로그인 처리 -->
+		<interceptor>
+			<mapping path="/sample/user/loginPost" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		
+		<!-- 로그인이 필요한 url 처리 -->
+		<interceptor>
+			<mapping path="/sample/sboard/register" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+	</interceptors> 
+	
 </beans:beans>

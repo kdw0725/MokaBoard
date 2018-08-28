@@ -116,5 +116,35 @@ insert into tbl_reply(bno, replytext, replyer)
 
 commit;
 
+/* 로그인 영역 */
+
+create table tbl_user(
+	uid varchar(50) NOT NULL,
+    upw varchar(50) NOT NULL,
+    uname varchar(100) NOT NULL,
+    upoint int NOT NULL DEFAULT 0,
+    primary key(uid)
+);
+
+
+insert into tbl_user(uid, upw, uname) values('user00', 'user00', 'IRON MAN');
+insert into tbl_user(uid, upw, uname) values('user01', 'user01', 'CAPTAIN');
+insert into tbl_user(uid, upw, uname) values('user02', 'user02', 'HULK');
+insert into tbl_user(uid, upw, uname) values('user03', 'user03', 'Thor');
+insert into tbl_user(uid, upw, uname) values('user04', 'user04', 'Quick Silver');
+
+commit;
+
+/* 자동 로그인을 위한 데이터 : 세션쿠키 아이디 저장용*/
+alter table tbl_user add column
+sessionkey varchar(50) not null default 'none';
+
+/* 자동 로그인을 위한 데이터 : 세션쿠키 유효기간*/
+alter table tbl_user add column 
+sessionlimit timestamp;
+
+
+
+
 
 

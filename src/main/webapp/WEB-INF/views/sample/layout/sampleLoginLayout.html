@@ -24,7 +24,9 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
 <!--  <link rel="stylesheet" th:href="@{/resources/dist/css/skins/skin-blue.min.css}"> -->
-<link rel="stylesheet" th:href="@{/resources/dist/css/skins/_all-skins.min.css}">
+<!-- <link rel="stylesheet" th:href="@{/resources/dist/css/skins/_all-skins.min.css}"> -->
+<link rel="stylesheet" th:href="@{/resources/plugins/iCheck/square/blue.css}">
+
 	
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -59,6 +61,7 @@
 <script th:src="@{/resources/hanumoka_js/hanumoka_handlebar_common.js}"></script>
 <script th:src="@{/resources/hanumoka_js/hanumoka_ajax_common.js}"></script>
 
+<script th:src="@{/resources/plugins/iCheck/icheck.min.js}"></script>
 
 </head>
 
@@ -82,20 +85,12 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
+<body class="hold-transition login-page">
 
-		<header th:replace="fragments/header :: headerFragment"></header>
+	
+<div layout:fragment="content"></div>  <!-- 실제 콘텐츠  -->
 		
-		<aside th:replace="sample/fragments/leftAside :: leftAsideFragment"></aside>
 	
-		<div layout:fragment="content"></div>  <!-- 실제 콘텐츠  -->
-	
-		<footer th:replace="fragments/footer:: footerFragment"></footer>
-		
-		<div th:replace="fragments/controlDiv :: controlDivFragment"></div> <!-- 모바일 버전에서 하단과 우측에 나오는 사이즈 조정바 -->
-	
-	</div>
 	<!-- ./wrapper -->
 	
 	

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{sample/layout/sampleLoginLayout}">
+
+<head>
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+/*]]>*/
+</script>
+
+
+<style>
+
+</style>
+</head>
+
+<div layout:fragment="content">
+<script>
+//음 왜 이페이지가 있는지 모르겠다.. 없으면 에러난다.
+self.location = "/sample/home";
+
+</script>
+
+</div>
+</html>

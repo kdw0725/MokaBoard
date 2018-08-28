@@ -33,6 +33,9 @@
 		<h1>lagacy html5 태스트</h1><br>
 		<h1>나는 br태그를 닫고 싶지 않아.</h1><br>
 		<h1>바보야</h1> 
+		
+		<!-- <p th:text="${session.result}" th:unless="${session == null}">[...]</p> -->
+		<span>로그인 id : </span><span th:text="${session.login.uid}" th:unless="${session.login == null}">로그아웃 상태</span>
 
       <!--------------------------
         | Your Page Content Here |
