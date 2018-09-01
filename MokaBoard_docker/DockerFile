@@ -1,0 +1,8 @@
+# 1.Docker 이미지 가져오기
+FROM busybox
+
+# 2.작성자 정보
+MAINTAINER 0.1 kimgas2000@naver.com
+
+# 3.데이터 설정
+VOLUME /var/lib/mysql
